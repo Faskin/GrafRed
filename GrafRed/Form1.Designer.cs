@@ -51,13 +51,16 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picDrawingSurface = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.trackBar = new System.Windows.Forms.TrackBar();
             this.paneldown.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawingSurface)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // paneldown
             // 
+            this.paneldown.Controls.Add(this.trackBar);
             this.paneldown.Controls.Add(this.label1);
             this.paneldown.Location = new System.Drawing.Point(63, 425);
             this.paneldown.Name = "paneldown";
@@ -145,16 +148,18 @@
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Z";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.undoToolStripMenuItem.Text = "Undo";
+            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // renoToolStripMenuItem
             // 
             this.renoToolStripMenuItem.Name = "renoToolStripMenuItem";
             this.renoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.Z)));
-            this.renoToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.renoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.renoToolStripMenuItem.Text = "Reno";
+            this.renoToolStripMenuItem.Click += new System.EventHandler(this.renoToolStripMenuItem_Click);
             // 
             // penToolStripMenuItem
             // 
@@ -162,7 +167,7 @@
             this.solToolStripMenuItem,
             this.colorToolStripMenuItem});
             this.penToolStripMenuItem.Name = "penToolStripMenuItem";
-            this.penToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.penToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.penToolStripMenuItem.Text = "Pen";
             // 
             // solToolStripMenuItem
@@ -172,14 +177,15 @@
             this.dotToolStripMenuItem,
             this.dashDotToolStripMenuItem});
             this.solToolStripMenuItem.Name = "solToolStripMenuItem";
-            this.solToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.solToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.solToolStripMenuItem.Text = "Style";
             // 
             // solidToolStripMenuItem
             // 
             this.solidToolStripMenuItem.Name = "solidToolStripMenuItem";
-            this.solidToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.solidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.solidToolStripMenuItem.Text = "Solid";
+            this.solidToolStripMenuItem.Click += new System.EventHandler(this.solidToolStripMenuItem_Click);
             // 
             // dotToolStripMenuItem
             // 
@@ -224,6 +230,7 @@
             // 
             // picDrawingSurface
             // 
+            this.picDrawingSurface.BackColor = System.Drawing.Color.White;
             this.picDrawingSurface.Location = new System.Drawing.Point(63, 42);
             this.picDrawingSurface.Name = "picDrawingSurface";
             this.picDrawingSurface.Size = new System.Drawing.Size(693, 374);
@@ -241,6 +248,14 @@
             this.panel1.Size = new System.Drawing.Size(736, 392);
             this.panel1.TabIndex = 3;
             // 
+            // trackBar
+            // 
+            this.trackBar.Location = new System.Drawing.Point(586, -3);
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(107, 45);
+            this.trackBar.TabIndex = 1;
+            this.trackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +272,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawingSurface)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,6 +303,7 @@
         private System.Windows.Forms.PictureBox picDrawingSurface;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TrackBar trackBar;
     }
 }
 

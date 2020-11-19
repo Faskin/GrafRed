@@ -20,20 +20,22 @@ namespace GrafRed
         Point oldlocation;
         Pen currentpen;
         Color historyColor;
+        List<Image> History;
+        int historyCounter;
+
         public Form1()
         {
             InitializeComponent();
-
-            Bitmap pic = new Bitmap(750, 500);
-            picDrawingSurface.Image = pic;
+            History = new List<Image>();
 
             drawing = false;
             currentpen = new Pen(Color.Black);
-            
+            currentpen.Width = trackBar.Value;
 
+            
             
         }
-
+        
 
 
         private void picDrawingSurface_Click(object sender, EventArgs e)
@@ -53,6 +55,20 @@ namespace GrafRed
                 drawing = true;
                 oldlocation = e.Location;
                 graphicsPath = new GraphicsPath();
+                historyColor = currentpen.Color;
+
+
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+               
+                graphicsPath = new GraphicsPath();
+                oldlocation = e.Location;
+                drawing = true;
+                currentpen.Color = Color.White;
+                
+
+
 
             }
         }
@@ -95,17 +111,24 @@ namespace GrafRed
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            History.Clear();
+            historyCounter = 0;
+            Bitmap pic = new Bitmap(750, 500);
+            picDrawingSurface.Image = pic;
+            History.Add(new Bitmap(picDrawingSurface.Image));
+
             if (picDrawingSurface.Image != null)
             {
                 var result = MessageBox.Show("Save the current image before creating a new drawing?", "Warning", MessageBoxButtons.YesNoCancel);
                 switch (result)
                 {
                     case DialogResult.No: break;
-                    case DialogResult.Yes: newToolStripMenuItem_Click(sender, e); break;
-                    case DialogResult.Cancel:
-                        return;
+                    case DialogResult.Yes: saveToolStripMenuItem_Click(sender, e); break;
+                    case DialogResult.Cancel: return;
                 }
+                
             }
+            
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,12 +152,20 @@ namespace GrafRed
 
         private void picDrawingSurface_MouseUp(object sender, MouseEventArgs e)
         {
+            History.RemoveRange(historyCounter + 1, History.Count - historyCounter - 1);
+            History.Add(new Bitmap(picDrawingSurface.Image));
+            if (historyCounter + 1 < 10) historyCounter++;
+            if (History.Count - 1 == 10) History.RemoveAt(0);
+
+            currentpen.Color = historyColor;
             drawing = false;
             try
             {
+                
                 graphicsPath.Dispose();
             }
             catch { };
+           
         }
 
         private void picDrawingSurface_MouseMove(object sender, MouseEventArgs e)
@@ -154,7 +185,39 @@ namespace GrafRed
             }
         }
 
-        
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+             currentpen.Width = trackBar.Value;
+
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (History.Count != 0 && historyCounter != 0)
+            {
+                picDrawingSurface.Image = new Bitmap(History[--historyCounter]);
+
+            }
+            else MessageBox.Show("History is empty.");
+
+        }
+
+        private void renoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (historyCounter < History.Count - 1)
+            {
+                picDrawingSurface.Image = new Bitmap(History[++historyCounter]);
+            }
+            else MessageBox.Show("History is empty.");
+
+        }
+
+        private void solidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            currentpen.DashStyle = DashStyle.Solid;
+
+            
+        }
     }
 }
 
