@@ -22,6 +22,9 @@ namespace GrafRed
         Color historyColor;
         List<Image> History;
         int historyCounter;
+        bool style = false;
+        Form2 f2 = new Form2();
+        
 
         public Form1()
         {
@@ -31,7 +34,6 @@ namespace GrafRed
             drawing = false;
             currentpen = new Pen(Color.Black);
             currentpen.Width = trackBar.Value;
-
             
             
         }
@@ -47,7 +49,7 @@ namespace GrafRed
         {
             if (picDrawingSurface.Image == null)
             {
-                MessageBox.Show("Create a new file first");
+                MessageBox.Show("Create a new file first", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (e.Button == MouseButtons.Left)
@@ -75,6 +77,7 @@ namespace GrafRed
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             SaveFileDialog SaveDlg = new SaveFileDialog();
             SaveDlg.Filter = "JPEG Image|*.jpeg| Bitmap Image| .bmp| GIF Image| *.gif| PNG Image| *.png";
             SaveDlg.Title = "Save an Image File";
@@ -117,6 +120,11 @@ namespace GrafRed
             picDrawingSurface.Image = pic;
             History.Add(new Bitmap(picDrawingSurface.Image));
 
+
+            Graphics g = Graphics.FromImage(picDrawingSurface.Image);
+            g.Clear(Color.White);
+            g.DrawImage(picDrawingSurface.Image, 0, 0, 750, 500);
+
             if (picDrawingSurface.Image != null)
             {
                 var result = MessageBox.Show("Save the current image before creating a new drawing?", "Warning", MessageBoxButtons.YesNoCancel);
@@ -139,7 +147,9 @@ namespace GrafRed
             openFileDialog.FilterIndex = 1;
 
             if (openFileDialog.ShowDialog() != DialogResult.Cancel)
+            {
                 picDrawingSurface.Load(openFileDialog.FileName);
+            }
             picDrawingSurface.SizeMode = PictureBoxSizeMode.AutoSize;
             
 
@@ -173,16 +183,16 @@ namespace GrafRed
             label1.Text = e.X.ToString() + ", " + e.Y.ToString();
             if (drawing)
             {
-                Graphics graphics = Graphics.FromImage(picDrawingSurface.Image);
-                graphicsPath.AddLine(oldlocation, e.Location);
-                graphics.DrawPath(currentpen, graphicsPath);
-                oldlocation = e.Location;
-                graphics.Dispose();
-                picDrawingSurface.Invalidate();
-
-
-               
+                
+             
+                    Graphics g = Graphics.FromImage(picDrawingSurface.Image);
+                    graphicsPath.AddLine(oldlocation, e.Location);
+                    g.DrawPath(currentpen, graphicsPath);
+                    oldlocation = e.Location;
+                    g.Dispose();
+                    picDrawingSurface.Invalidate();
             }
+           
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -217,6 +227,11 @@ namespace GrafRed
             currentpen.DashStyle = DashStyle.Solid;
 
             
+        }
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            f2.ShowDialog();
         }
     }
 }

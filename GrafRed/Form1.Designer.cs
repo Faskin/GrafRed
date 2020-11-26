@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.paneldown = new System.Windows.Forms.Panel();
+            this.trackBar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,11 +52,10 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picDrawingSurface = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.trackBar = new System.Windows.Forms.TrackBar();
             this.paneldown.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawingSurface)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // paneldown
@@ -66,6 +66,14 @@
             this.paneldown.Name = "paneldown";
             this.paneldown.Size = new System.Drawing.Size(693, 23);
             this.paneldown.TabIndex = 0;
+            // 
+            // trackBar
+            // 
+            this.trackBar.Location = new System.Drawing.Point(586, -3);
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(107, 45);
+            this.trackBar.TabIndex = 1;
+            this.trackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // label1
             // 
@@ -148,7 +156,7 @@
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Z";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -157,7 +165,7 @@
             this.renoToolStripMenuItem.Name = "renoToolStripMenuItem";
             this.renoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.Z)));
-            this.renoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.renoToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.renoToolStripMenuItem.Text = "Reno";
             this.renoToolStripMenuItem.Click += new System.EventHandler(this.renoToolStripMenuItem_Click);
             // 
@@ -167,7 +175,7 @@
             this.solToolStripMenuItem,
             this.colorToolStripMenuItem});
             this.penToolStripMenuItem.Name = "penToolStripMenuItem";
-            this.penToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.penToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.penToolStripMenuItem.Text = "Pen";
             // 
             // solToolStripMenuItem
@@ -177,13 +185,13 @@
             this.dotToolStripMenuItem,
             this.dashDotToolStripMenuItem});
             this.solToolStripMenuItem.Name = "solToolStripMenuItem";
-            this.solToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.solToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.solToolStripMenuItem.Text = "Style";
             // 
             // solidToolStripMenuItem
             // 
             this.solidToolStripMenuItem.Name = "solidToolStripMenuItem";
-            this.solidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.solidToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.solidToolStripMenuItem.Text = "Solid";
             this.solidToolStripMenuItem.Click += new System.EventHandler(this.solidToolStripMenuItem_Click);
             // 
@@ -204,6 +212,7 @@
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
             this.colorToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.colorToolStripMenuItem.Text = "Color";
+            this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
             // 
             // brushToolStripMenuItem
             // 
@@ -248,14 +257,6 @@
             this.panel1.Size = new System.Drawing.Size(736, 392);
             this.panel1.TabIndex = 3;
             // 
-            // trackBar
-            // 
-            this.trackBar.Location = new System.Drawing.Point(586, -3);
-            this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(107, 45);
-            this.trackBar.TabIndex = 1;
-            this.trackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,13 +267,13 @@
             this.Controls.Add(this.paneldown);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "GrafRed";
             this.paneldown.ResumeLayout(false);
             this.paneldown.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawingSurface)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
