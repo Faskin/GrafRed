@@ -57,6 +57,7 @@ namespace GrafRed
                 drawing = true;
                 oldlocation = e.Location;
                 graphicsPath = new GraphicsPath();
+                currentpen.Color = returnColor();
                 historyColor = currentpen.Color;
 
 
@@ -135,6 +136,7 @@ namespace GrafRed
                     case DialogResult.Cancel: return;
                 }
                 
+                
             }
             
         }
@@ -148,13 +150,18 @@ namespace GrafRed
 
             if (openFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                picDrawingSurface.Load(openFileDialog.FileName);
+                picDrawingSurface.Image = new Bitmap(openFileDialog.FileName);
+                picDrawingSurface.SizeMode = PictureBoxSizeMode.AutoSize;
+                //picDrawingSurface.Load(openFileDialog.FileName);
+                panel1.AutoScroll = true;
             }
-            picDrawingSurface.SizeMode = PictureBoxSizeMode.AutoSize;
             
 
         }
-
+        private Color returnColor()
+        {
+            return f2.GetColor();
+        }
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -162,16 +169,20 @@ namespace GrafRed
 
         private void picDrawingSurface_MouseUp(object sender, MouseEventArgs e)
         {
-            History.RemoveRange(historyCounter + 1, History.Count - historyCounter - 1);
+            //History.RemoveRange(historyCounter + 1, History.Count - historyCounter - 1);
             History.Add(new Bitmap(picDrawingSurface.Image));
-            if (historyCounter + 1 < 10) historyCounter++;
-            if (History.Count - 1 == 10) History.RemoveAt(0);
+            if (historyCounter + 1 < 10)
+            {
+                History.RemoveAt(0);
+                historyCounter++;
+            }
+           // if (History.Count - 1 == 10) History.RemoveAt(0);
 
-            currentpen.Color = historyColor;
             drawing = false;
+            currentpen.Color = historyColor;
             try
             {
-                
+                graphicsPath = new GraphicsPath();
                 graphicsPath.Dispose();
             }
             catch { };
@@ -233,6 +244,8 @@ namespace GrafRed
         {
             f2.ShowDialog();
         }
+
+        
     }
 }
 
